@@ -13,6 +13,7 @@ app.use(express.json());
 
 // 
 
+
 const mongoURI = process.env.MONGODB_url; // ดึงค่าจาก Environment Variable
 
 if (!mongoURI) {
