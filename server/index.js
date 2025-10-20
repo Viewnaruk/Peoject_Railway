@@ -14,17 +14,19 @@ app.use(express.json());
 // 
 
 
-const mongoURI = process.env.MONGODB_url; // ดึงค่าจาก Environment Variable
 
+
+const mongoURI = process.env.MONGO_URI || 'mongodb+srv://sasipreyas:1234@cluster0.fwzmzgy.mongodb.net/Web_App_Tourist_Reviews?retryWrites=true&w=majority';
 if (!mongoURI) {
-    console.error("❌ ERROR: MONGO_URI environment variable is not set!");
-    // อาจจะปิด process หรือใช้ค่า default แทน
-    process.exit(1); 
+  console.error('❌ ERROR: MONGO_URI environment variable is not set!');
+  process.exit(1);
 }
-
 mongoose.connect(mongoURI)
-    .then(() => console.log("✅ MongoDB connected successfully."))
-    .catch(err => console.error("❌ MongoDB connection error:", err));
+  .then(() => console.log('✅ MongoDB connected successfully'))
+  .catch(err => {
+    console.error('❌ MongoDB connection error:', err);
+    process.exit(1);
+  });
 
 
 const ReviewSchema = mongoose.Schema({
