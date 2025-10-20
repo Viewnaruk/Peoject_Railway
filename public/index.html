@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+    <link rel="stylesheet" href="/style.css">
+    
+</head>
+
+<body>
+  <h5>TOURIST ATTRACTIONS IN KHON KAEN SENTIMENT ANALYSIS</h5>
+  <div class="search-bar-row">
+    <div class="dropdown">
+        <label for="category" class = "label-STA">Select Tourist Attraction Category</label>
+        <select id="category" onchange="onPlaceChange(this.value)">
+            <!-- ตัวเลือกเดิมทั้งหมด -->
+            <option value="All">All</option>
+            <option value="Cafés">Cafés</option>
+            <option value="Historic Site">Historic Site</option>
+            <option value="Homestay">Homestay</option>
+            <option value="Markets">Markets</option>
+            <option value="Museum">Museum</option>
+            <option value="Nature">Nature</option>
+            <option value="Parks">Parks</option>
+            <option value="Religious Place">Religious Place</option>
+            <option value="Zoos">Zoos</option>
+        </select>
+    </div>
+    <input id="places" name="places" type="text" placeholder="Search Tourist Attraction" list="places-list" required onchange="onPlaceChange()">
+    <datalist id="places-list"></datalist>
+    <button type="submit">Search</button>
+  </div>
+
+  <div id="review-container">
+  <h3 id="reviewTitle">Write Review For</h3>
+  <input id="addreview" name="addreview" type="text" placeholder="Write Review For" />
+  <button type="button" class="submit-btn" onclick="addReview()">Submit</button>
+  <small id="errorMsg" style="color:red; display:none; font-family: 'Imprima', sans-serif;">Please write review in English.</small>
+</div>
+
+<div id="custom-alert-overlay" class="hidden">
+  <div id="custom-alert-box">
+    <h3 id="alert-title"></h3> 
+    <p id="alert-message-line1"></p>
+    <p id="alert-message-line2"></p>
+    <button id="alert-ok-button">Yes</button>
+  </div>
+</div>
+    
+
+    <!-- ภาพรวมรีวิวขอนแก่น -->
+    <h3 id="overviewTitle">Overview of Sentiment Analysis Results for Tourist Attractions in Khon Kaen</h3>
+    <div class="review-summary">
+        <div class="review-box all-reviews">
+            <label class="review-label">All Reviews</label>
+            <div id="all-reviews"></div>
+        </div>
+        <div class="review-box positive-reviews">
+            <label class="review-label">Positive</label>
+            <div id="positive-reviews"></div>
+        </div>
+        <div class="review-box negative-reviews">
+            <label class="review-label">Negative</label>
+            <div id="negative-reviews"></div>
+        </div>
+    </div>
+
+<div class="dropdown-Category_Aspect-container">
+  <div class="dropdownCategory">
+    <label for="category_aspect" class="label-STC">Select Tourist Category</label>
+    <select id="Category_Aspect" onchange="renderAspectChart()">
+      <option value="Cafés">Cafés</option>
+      <option value="Historic Site">Historic Site</option>
+      <option value="Homestay">Homestay</option>
+      <option value="Markets">Markets</option>
+      <option value="Museum">Museum</option>
+      <option value="Nature">Nature</option>
+      <option value="Parks">Parks</option>
+      <option value="Religious Place">Religious Place</option>
+      <option value="Zoos">Zoos</option>
+    </select>
+  </div>
+    <div class="dropdownAspect">
+    <label for="aspect" class="label-SA">Select Aspect</label>
+    <select id="Aspect" onchange="renderAspectChart()">
+      <!-- ตัวเลือกจะถูกเติมโดย JavaScript -->
+    </select>
+  </div>
+</div>
+
+<canvas id="aspectChart" width="1600" height="480"></canvas>
+
+<div class="main-flex-row">
+    <!-- กราฟ -->
+    <div id="chart">
+      <canvas id="sentimentChart" width="600" height="400"></canvas>
+    </div>
+
+    <!-- chart-container (dropdown + title + ตาราง) -->
+    <div class="chart-container">
+      <h3 id="top10Title"></h3>
+      <div class="dropdown-container">
+        <div class="dropdownSentiment">
+          <label for="result-select" class="label-SAR">Select Analysis Result</label>
+          <select id="Result" onchange="fetchTop10()">
+            <option value="Positive">Positive</option>
+            <option value="Negative">Negative</option>
+          </select>
+        </div>
+      </div>
+      <!-- ตาราง 10 อันดับ -->
+      <div id="top10Section">
+        <table id="top10Table" border="1">
+          <thead>
+            <tr   id="Top10Title">
+                <td  colspan="3" > Top 10 Tourist Attractions with the Highest % of Reviews </td> 
+            </tr>
+            <tr>
+              <th>Rank</th>
+              <th>Tourist Attraction</th>
+              <th>Analysis Result</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <!-- ตารางรีวิวข้อความ -->
+      <div id="reviewSection" style="display:none">
+        <table id="reviewTable" border="1">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th style="width:90px;">Tourist Attraction</th>
+              <th>Review</th>
+              <th>Result</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+</div>
+
+
+
+
+<script src="/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</body>
+
+

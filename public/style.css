@@ -1,0 +1,738 @@
+@import url('https://fonts.googleapis.com/css2?family=Imprima&display=swap');
+
+
+h5 {
+    font-family: 'Imprima', sans-serif;
+    color: rgb(0, 0, 0);
+    font-weight: 200;
+    text-align: center;  /* จัดข้อความไปทางซ้าย */
+    margin-left: -5px; /* ขยับจากขอบซ้ายเล็กน้อย */
+    margin-top: -10px; /* ป้องกันติดขอบบนเกินไป */
+    font-size: 20px;
+}
+
+body {
+    
+    /* text-align: center; */
+    /* background-color: #f8f9fa; */
+    padding: 20px;
+}
+
+.search-bar-row {
+  display: flex;
+  justify-content: center;   /* จัดให้อยู่ตรงกลางแนวนอน */
+  align-items: center;       /* จัดให้อยู่ตรงกลางแนวตั้ง */
+  gap: 15px;                 /* ระยะห่างระหว่างแต่ละอัน */
+  margin: 20px auto;
+  flex-wrap: wrap;           /* กัน layout แตกถ้าหน้าจอเล็ก */
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    align-items: center;
+    font-family: 'Imprima', sans-serif;
+    margin-bottom: -15px;
+}
+
+.label-STA {
+    position: absolute;
+    top: -20px; /* ให้ label อยู่บนปุ่ม */
+    left: 15px; /* ให้ label อยู่มุมซ้ายของ dropdown */
+    font-size: 12px;
+    color: #5A4B55;
+    background-color: rgb(228, 198, 220); /* ให้ label ดูกลืนกับปุ่ม */
+    padding: 0 5px;
+    z-index: 1; /* ให้ label อยู่ด้านบนสุด */
+    pointer-events: none; /* ป้องกัน label รบกวนการคลิก */
+    margin-top: 2px; /* ป้องกัน label ชิดกับปุ่มเกินไป */
+}
+
+select#category {
+    width: 250px;
+    height: 50px;
+    padding: 10px;
+    font-size: 15px;
+    color: black;
+    background-color: rgb(228, 198, 220); /* สีชมพู */
+    border: none;
+    border-radius: 12px;
+    appearance: none;
+    text-align: center;
+    cursor: pointer;
+    
+    text-align: left; /* ให้ text-align ขยับไปทางขวา */
+    padding-left: 20px;
+    align-items: flex-end;
+    position: relative;
+    font-family: 'Imprima', sans-serif;
+    font-weight: 200;
+    margin-top: -30px;
+    
+}
+
+
+
+select:focus {
+    outline: none;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+   .input-container {
+      position: relative;
+      width: 320px;
+    }
+
+    /* ช่องกรอกข้อความ */
+    #places {
+      width: 500px;
+      padding: 12px 16px;
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+      background-color: #fff;
+      margin: 10px;
+      box-sizing: border-box;
+      font-family: 'Imprima', sans-serif;
+    }
+
+    /* ตอน hover */
+    #places:hover {
+      border-color: #bbb;
+    }
+
+    /* ตอน focus */
+    #places:focus {
+      outline: none;
+      border-color: #4a90e2;
+      box-shadow: 0 0 8px rgba(74,144,226,0.3);
+    }
+
+    button[type="submit"] {
+  width: 100px;
+  height: 45px;
+  background-color: #69C1FF;
+  color: rgb(0, 0, 0);
+  padding: 8px 15px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Imprima', sans-serif;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+
+}
+
+input[type="search"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+h3 {
+    font-family: 'Imprima', sans-serif;
+    color: rgb(0, 0, 0);
+    font-weight: 200;
+    text-align: center;  /* จัดข้อความไปทางซ้าย */
+    margin-left: -5px; /* ขยับจากขอบซ้ายเล็กน้อย */
+    margin-top: 20px; /* ป้องกันติดขอบบนเกินไป */
+}
+
+.review-summary {
+  display: flex !important;         /* บังคับเป็น flex */
+  flex-direction: row !important;   /* บังคับแนวนอน */
+  justify-content: center !important;  /* จัดกลางแนวนอน */
+  align-items: flex-start !important;  /* จัดให้อยู่บนเส้นเดียวกัน */
+  gap: 20px !important;             /* ระยะห่าง */
+  margin: 20px auto 0 auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+
+.review-box {
+    width: 250px;
+    height: 70px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: lighter;
+    position: relative;
+    font-family: 'Imprima', sans-serif;
+}
+
+.all-reviews {
+    background-color: #96E6FF;
+    
+}
+
+.positive-reviews {
+    background-color: #77F9AB;
+}
+
+.negative-reviews {
+    background-color: #FF7B7B;
+}
+
+/* ให้ label อยู่ด้านบนซ้ายของกล่อง */
+.review-label {
+    font-size: 14px;
+    font-weight: normal;
+    color: #444;
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    background-color: inherit;
+}
+
+/* #sentimentChart {
+    width: 50%;         ปรับให้เล็กลงครึ่งหนึ่ง
+    max-width: 800px;   กำหนดขนาดสูงสุด
+    height: auto;
+    display: block;
+    margin-left: 0;     ชิดซ้าย
+    margin-top: 20px;
+    max-height: 450px;
+     
+
+  } */
+
+.dropdown-Category_Aspect-container {
+  display: flex;
+  justify-content: center;   /* จัดให้อยู่ตรงกลางแนวนอน */
+  align-items: center;       /* จัดให้อยู่ตรงกลางแนวตั้ง */
+  gap: 30px;                 /* ระยะห่างระหว่าง dropdown */
+  margin-bottom: 24px;
+}
+  .dropdownCategory {
+  position: relative; /* อยู่ตาม flow ปกติ */
+  display: inline-block;
+  margin-top: 50px;
+
+}
+select#Category_Aspect {
+  width: 200px;
+  height: 60px;
+  font-size: 15px;
+  padding-left: 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: rgb(228, 198, 220);
+  font-family: 'Imprima', sans-serif;
+  cursor: pointer;
+  padding-top: 22px;
+  background-image: none; /* ลบลูกศร */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  
+}
+/* Label Sentiment */
+.label-STC {
+  position: absolute;
+  top: -10px;
+  left: 15px;
+  font-size: 14px;
+  color: #5A4B55;
+  background-color: rgb(228, 198, 220);
+  padding: 0 5px;
+  pointer-events: none;
+  font-family: 'Imprima', sans-serif;
+  margin-top: 20px;
+}
+
+  .dropdownAspect {
+  position: relative; /* อยู่ตาม flow ปกติ */
+  display: inline-block;
+  margin-top: 50px;
+
+}
+select#Aspect {
+  width: 200px;
+  height: 60px;
+  font-size: 15px;
+  padding-left: 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: rgb(228, 198, 220);
+  font-family: 'Imprima', sans-serif;
+  cursor: pointer;
+  padding-top: 22px;
+  background-image: none; /* ลบลูกศร */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  
+}
+/* Label Sentiment */
+.label-SA {
+  position: absolute;
+  top: -10px;
+  left: 15px;
+  font-size: 14px;
+  color: #5A4B55;
+  background-color: rgb(228, 198, 220);
+  padding: 0 5px;
+  pointer-events: none;
+  font-family: 'Imprima', sans-serif;
+  margin-top: 20px;
+}
+
+.chart-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#container {
+    display: flex;
+    align-items: flex-start; /* จัดแนวบนเท่ากัน */
+    gap: 100px; /* ช่องว่างระหว่างแผนภูมิและตาราง */
+    margin-top: 150px;
+  }
+
+  /* แผนภูมิ */
+#chart{
+    width: 50%;         /* ปรับให้เล็กลงครึ่งหนึ่ง */
+    max-width: 800px;   /* กำหนดขนาดสูงสุด */
+    display: block;
+    margin-left: 0;     /* ชิดซ้าย */
+    margin-top: -70px;
+    max-height: 800px;
+}
+
+.dropdown-container {
+  position: relative; /* reference สำหรับ absolute child */
+}
+
+/* Dropdown Sentiment */
+.dropdownSentiment {
+  position: relative; /* อยู่ตาม flow ปกติ */
+  display: inline-block;
+  transform: translateX(-180px); /* ขยับไปทางขวา */
+  margin: 15px;
+
+}
+select#Result {
+  width: 200px;
+  height: 60px;
+  font-size: 15px;
+  padding-left: 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: #FFCEE7;
+  font-family: 'Imprima', sans-serif;
+  cursor: pointer;
+  padding-top: 22px;
+  background-image: none; /* ลบลูกศร */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  
+}
+
+/* Label Sentiment */
+.label-SAR {
+  position: absolute;
+  top: -10px;
+  left: 15px;
+  font-size: 14px;
+  color: #5A4B55;
+  background-color: #FFCEE7;
+  padding: 0 5px;
+  pointer-events: none;
+  font-family: 'Imprima', sans-serif;
+  margin-top: 20px;
+}
+
+/* Dropdown Keyword */
+.dropdownKeyword {
+  position: absolute; /* วางแบบ absolute ไม่กระทบ sentiment */
+  top: 0; /* ปรับตามต้องการ */
+  left: 220px; /* วางข้างๆ sentiment */
+  display: none; /* ซ่อนก่อน */
+  margin: 15px;
+  transform: translateX(-170px);
+}
+select#Keyword {
+  width: 200px;
+  height: 60px;
+  padding-left: 20px;
+  font-size: 15px;
+  border-radius: 20px;
+  border: none;
+  background-color: #FFCEE7;
+  font-family: 'Imprima', sans-serif;
+  cursor: pointer;
+  padding-top: 22px;
+  background-image: none; /* ลบลูกศร */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Label Keyword */
+.label-KW {
+  position: absolute;
+  top: -10px;
+  left: 15px;
+  font-size: 14px;
+  color: #5A4B55;
+  background-color: #FFCEE7;
+  padding: 0 5px;
+  pointer-events: none;
+  font-family: 'Imprima', sans-serif;
+  margin-top: 20px;
+}
+
+
+
+
+  /* กำหนดขนาดและ border ของตาราง */
+#top10Table {
+    border-collapse: collapse;
+    width: 550px;
+    border: none; /* ลบขอบตาราง */
+    font-family: 'Imprima', sans-serif;
+    font-size: 14px;
+    max-height: 600px;
+  }
+
+#top10Table #Top10Title td {
+  font-family: 'Imprima', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px;
+  background-color: #f0f0f0;
+  color: #333;
+  border-bottom: 2px solid #ccc;
+}
+
+#top10Table th, #top10Table td {
+    /* border: 1px solid #ddd; */
+    padding: 6px;
+    border: none; /* ลบขอบเซลล์ */
+    font-family: 'Imprima', sans-serif;
+  }
+  
+/* ช่องRank */
+  #top10Table td:nth-child(1) {
+  text-align: center;
+  width: 60px; /* กำหนดความกว้างคงที่ */
+  align-items: center;
+}
+
+/* ช่อง Tourist Attraction */
+  #top10Table td:nth-child(2) {
+  text-align: left;
+  width: 100px; /* กำหนดความกว้างคงที่ */
+  
+}
+
+/* ช่อง Analysis Result*/
+  #top10Table td:nth-child(3) {
+  text-align: left;
+  width: 40px; /* กำหนดความกว้างคงที่ */
+  align-items: center;
+}
+
+
+
+
+#top10Table th {
+    /* background-color: #f2f2f2; */
+    font-weight: bold;
+    background-color: #DCDCF4;
+  }
+
+
+
+  #top10Table tbody tr:nth-child(odd) {
+    background-color: #C2ADFC; /* ม่วงเข้ม */
+  }
+
+  #top10Table tbody tr:nth-child(even) {
+    background-color: #DCDCF4; /* ม่วงอ่อน */
+    color: black; /* ตัวหนังสือสีเข้มสำหรับพื้นหลังอ่อน */
+  }
+
+  #reviewTable {
+    border-collapse: collapse;
+    width: 550px;
+    border: none; /* ลบขอบตาราง */
+    font-family: 'Imprima', sans-serif;
+    font-size: 14px;
+    max-height: 400px;
+    text-align: center;
+  }
+
+.bar-container {
+  position: relative;
+  width: 150px;  /* ความกว้างแท่ง */
+  height: 20px;
+  background-color: #eee;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* แท่ง positive */
+.bar.positive {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: #77F9B1;
+  text-align: right;
+  padding-right: 2px;
+  color: #000;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+/* แท่ง negative */
+.bar.negative {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  background-color: #FF7B7B;
+  text-align: left;
+  padding-left: 2px;
+  color: #000;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.main-flex-row {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  margin-left: 0;      /* ปรับเป็น 0 */
+  margin-right: 0;     /* ปรับเป็น 0 */
+  margin-top: 150px;
+}
+
+#sentimentChart{
+  margin-top: 50px;
+  
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column; /* เพิ่มบรรทัดนี้ */
+    align-items: center;
+    margin-bottom: 10px;
+}
+.chart-container h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+  text-align: center;
+  margin-top: -100px; /* เพิ่มบรรทัดนี้เพื่อขยับขึ้นบน */
+  margin-right: 100px; /*ขยับบไปทางขวา */
+}
+
+/* ให้ตารางรีวิวสามารถเลื่อนแนวตั้ง/แนวนอนได้ */
+#reviewSection {
+  max-height: 400px; /* ปรับความสูงตารางตามต้องการ */
+  overflow-y: auto;
+  overflow-x: auto;
+  margin-top: 10px;
+  border-radius: 8px;
+  align-items: center;
+}
+.review-scroll {
+  max-width: 300px;    /* ปรับขนาดตามต้องการ */
+  max-height: 80px;    /* ปรับความสูงตามต้องการ */
+  overflow-y: auto;
+  overflow-x: auto;
+  white-space: pre-line; 
+  word-break: break-word;
+  padding: 5px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+/* ทำให้หัวตาราง sticky */
+#reviewTable thead th {
+  position: sticky;
+  top: 0;
+  background-color: #7CBBF4; /* สีพื้นหลังหัวตาราง */
+  z-index: 2;
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+/* ปุ่มดูเพิ่มเติม */
+.show-more-btn {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+
+div#review-container {
+  display: flex;
+  justify-content: center;  /* ✅ จัดให้อยู่ตรงกลางแนวนอน */
+  align-items: center;      /* จัดให้อยู่กึ่งกลางแนวตั้ง (ใน container นี้) */
+  gap: 30px;
+  margin: auto;        /*ทำให้มี margin อัตโนมัติด้านซ้าย-ขวา*/
+  width: fit-content;       /* ให้กล่องพอดีกับเนื้อหาข้างใน */
+}
+
+#addreview {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+  width: 700px;
+  font-family: 'Imprima', sans-serif;
+}
+
+
+
+
+#addreview:focus {
+  border-color: #4CAF50; /* สีเขียวเวลา focus */
+  box-shadow: 0 0 6px rgba(76, 175, 80, 0.4);
+}
+#addreview:focus.error {
+  border-color: #ff0000; /* สีเขียวเวลา focus */
+  box-shadow: 0 0 6px rgba(175, 83, 76, 0.4);
+}
+
+
+.submit-btn {
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #77F9B1);
+  border: none;
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s;
+  font-family: 'Imprima', sans-serif;
+  height: 45px;
+  width : 100px;
+  margin-left: 20px; 
+}
+
+.submit-btn:hover {
+  background: linear-gradient(135deg, #36a865);
+  /* transform: translateY(-2px); */
+}
+
+.submit-btn:active {
+  transform: scale(0.97);
+}
+
+/* -------------------- สไตล์สำหรับ Custom Alert -------------------- */
+
+/* 1. Overlay (พื้นหลังสีดำทึบ) */
+#custom-alert-overlay {
+    position: fixed; /* ให้อยู่กับที่ แม้จะเลื่อนหน้าจอ */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* พื้นหลังดำกึ่งโปร่งใส */
+    z-index: 10000; /* ให้อยู่บนสุดของทุกองค์ประกอบ */
+    display: flex; /* ใช้ Flexbox เพื่อจัดให้อยู่ตรงกลาง */
+    justify-content: center; /* จัดกลางแนวนอน */
+    align-items: center; /* จัดกลางแนวตั้ง */
+    backdrop-filter: blur(2px); /* เพิ่มความสวยงามด้วยการเบลอพื้นหลัง */
+}
+
+/* 2. Alert Box (กล่องข้อความหลัก) */
+#custom-alert-box {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: bounceIn 0.5s ease-out; /* แอนิเมชันให้กล่องเด้งเข้ามา */
+    transform: scale(1);
+    transition: all 0.3s;
+    
+}
+
+/* 3. ข้อความแจ้งเตือน */
+#alert-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family: 'Imprima', sans-serif;
+}
+
+#alert-message-line1 {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 5px;
+    font-family: 'Imprima', sans-serif;
+}
+
+#alert-message-line2 {
+    font-size: 0.95em;
+    color: #777;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    font-family: 'Imprima', sans-serif;
+}
+
+/* 4. ปุ่มตกลง */
+#alert-ok-button {
+    border: none;
+    padding: 10px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.1s;
+    font-family: 'Imprima', sans-serif;
+}
+
+/* 5. สไตล์เฉพาะสำหรับ Success (สำเร็จ) */
+.alert-success #alert-title { color: #28a745; } /* สีเขียว */
+.alert-success #alert-ok-button { 
+    background-color: #28a745; 
+    color: white; 
+}
+.alert-success #alert-ok-button:hover { 
+    background-color: #1e7e34;
+    transform: translateY(-1px);
+}
+
+/* 6. สไตล์เฉพาะสำหรับ Error (ผิดพลาด) */
+.alert-error #alert-title { color: #dc3545; } /* สีแดง */
+.alert-error #alert-ok-button { 
+    background-color: #dc3545; 
+    color: white; 
+}
+.alert-error #alert-ok-button:hover { 
+    background-color: #bd2130;
+    transform: translateY(-1px);
+}
+
+/* 7. Utility Class สำหรับซ่อน */
+.hidden {
+    display: none !important;
+}
+
