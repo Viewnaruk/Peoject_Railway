@@ -322,10 +322,9 @@ app.get('/', (req, res) => {
 //     console.log("Server is Running at http://localhost:3001")
 // })
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`✅ Server running on port ${PORT}`);
-});
+const PORT = process.env.PORT || 3000;
+const HOST = '0.0.0.0'; // Bind to all interfaces
+app.listen(PORT, HOST, () => console.log(`✅ Server running on port ${PORT}`));
 
 //ถ้าจะแก้ให้เหมือนเดิมแก้ตรงนี้
 const FASTAPI_URL = process.env.FASTAPI_URL || 'http://127.0.0.1:9000';
