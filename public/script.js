@@ -70,16 +70,21 @@ async function updateOverviewTitle() {
   
 // ฟังก์ชันดึงข้อมูลตามสถานที่ที่เลือก
 async function fetchDataByPlace(place) {
-    
   try {
-    const url = place 
-      ? `http://localhost:3001/getReviews?place=${encodeURIComponent(place)}`
-      : 'http://localhost:3001/getReviews';
+    const baseUrl = window.location.origin || 'http://localhost:8080';
+    const url = place
+      ? `${baseUrl}/getReviews?place=${encodeURIComponent(place)}`
+      : `${baseUrl}/getReviews`;
     
     const response = await fetch(url);
-    return await response.json();
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log('Fetched data:', data); // Log เพื่อ debug
+    return data;
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error('Error fetching data:', error.message);
     return [];
   }
 }
