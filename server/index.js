@@ -309,12 +309,31 @@ app.get("/getStatsByPlace", async (req, res) => {
 // });
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
-
-// ส่ง index.html สำหรับ route /
 app.get('/', (req, res) => {
-  const filePath = path.join(__dirname, '..', 'public', 'index.html');
-  console.log('Serving file:', filePath); // Debug path
-  res.sendFile(filePath);
+  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'), (err) => {
+    if (err) {
+      console.error('Error serving index.html:', err);
+      res.status(500).send('Error serving index.html');
+    }
+  });
+});
+
+// Favicon
+app.get('/favicon.ico', (req, res) => {
+  console.log('Received /favicon.ico request');
+  const faviconPath = path.join(__dirname, '..', 'public', 'favicon.ico');
+  res.sendFile(faviconPath, (err) => {
+    if (err) {
+      console.error('Error serving favicon.ico:', err);
+      res.status(204).end();
+    }
+  });
+});
+
+// Error handling
+app.use((err, req, res, next) => {
+  console.error('Server error:', err);
+  res.status(500).json({ error: 'Internal Server Error' });
 });
 
 
@@ -325,6 +344,7 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 3000;
 const HOST = '0.0.0.0'; // Bind to all interfaces
 app.listen(PORT, HOST, () => console.log(`✅ Server running on port ${PORT}`));
+
 
 //ถ้าจะแก้ให้เหมือนเดิมแก้ตรงนี้
 const FASTAPI_URL = process.env.FASTAPI_URL || 'http://127.0.0.1:9000';
