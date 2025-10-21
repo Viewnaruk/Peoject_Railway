@@ -47,7 +47,11 @@ const ReviewSchema = mongoose.Schema({
 
 const ReviewModel = mongoose.model("Review", ReviewSchema,"Review")
 
-
+// Health Check
+app.get('/health', (req, res) => {
+  console.log('Health check received');
+  res.status(200).send('OK');
+});
 
 
 app.get("/getReviews", (req, res) => {
@@ -341,7 +345,7 @@ app.use((err, req, res, next) => {
 //     console.log("Server is Running at http://localhost:3001")
 // })
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 const HOST = '0.0.0.0'; // Bind to all interfaces
 app.listen(PORT, HOST, () => console.log(`✅ Server running on port ${PORT}`));
 
