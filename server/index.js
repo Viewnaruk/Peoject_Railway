@@ -258,7 +258,7 @@ app.get("/analyze", async (req, res) => {
     // loop ส่ง _id ไป FastAPI วิเคราะห์
     for (const r of reviews) {
       try {
-        const response = await axios.post("http://127.0.0.1:9000/predict", {
+        const response = await axios.post(`${FASTAPI_URL}`, {
           review_id: r._id
         });
         results.push(response.data);
@@ -351,7 +351,7 @@ app.listen(PORT, HOST, () => console.log(`✅ Server running on port ${PORT}`));
 
 
 //ถ้าจะแก้ให้เหมือนเดิมแก้ตรงนี้
-const FASTAPI_URL = process.env.FASTAPI_URL || 'http://127.0.0.1:9000';
+const FASTAPI_URL = 'https://your-fastapi-service.onrender.com';
 app.get("/analyze", async (req, res) => {
   try {
     const reviews = await ReviewModel.find({}).limit(10);
