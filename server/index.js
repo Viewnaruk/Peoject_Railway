@@ -351,45 +351,20 @@ app.listen(PORT, HOST, () => console.log(`✅ Server running on port ${PORT}`));
 
 
 //ถ้าจะแก้ให้เหมือนเดิมแก้ตรงนี้
-const FASTAPI_URL = 'https://your-fastapi-service.onrender.com';
-app.get("/analyze", async (req, res) => {
-  try {
-    const reviews = await ReviewModel.find({}).limit(10);
-    console.log("Number of reviews fetched:", reviews.length);
-    const results = [];
-
-    for (const r of reviews) {
-      try {
-        const response = await axios.post(`${FASTAPI_URL}/predict`, {
-          review_id: r._id
-        });
-        results.push(response.data);
-      } catch (err) {
-        console.error("Error analyzing review:", r._id, err.message);
-      }
-    }
-
-    res.json(results);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+const FASTAPI_URL = 'https://peojectrailway-production-4ceb.up.railway.app';
 
 
 app.post('/addReview', async (req, res) => {
-  console.log("Received request to /addReview at", new Date().toISOString(), req.body);
+  console.log("Received request to /addReview");
 
   try {
-    // รับค่าจาก client และตรวจสอบ
+    // รับค่าจาก client
     const {
       Tourist_Attraction_ThaiName,
       Tourist_Attraction_Category,
       Tourist_Attraction,
       Review
     } = req.body;
-
-    if (!Review) throw new Error('Review is required');
-    if (!Tourist_Attraction_Category) throw new Error('Tourist_Attraction_Category is required');
 
     // เตรียมข้อมูลเบื้องต้น
     const newReview = {
@@ -403,50 +378,36 @@ app.post('/addReview', async (req, res) => {
       Emoji: "-",
       Emoji_Label: "-",
       Label_vaderSentiment: "-",
-      Aspect: "-",
-      CreateAt: new Date() // ตั้งค่าเพียงครั้งเดียว
+      Aspect: "-" ,
+      CreateAt: new Date()
+    
     };
 
-    // ส่งรีวิวไป FastAPI เพื่อวิเคราะห์
-    console.log('Calling FastAPI at:', FASTAPI_URL);
-    const predictStart = Date.now();
+    // ส่งรีวิวไป FastAPI เพื่อวิเคราะห์  กับตรงนี้ถ้าจะแก้ให้เหมือนเดิมแก้ตรงนี้
     const predictRes = await axios.post(`${FASTAPI_URL}/predict`, {
-      review: Review,
-      category: Tourist_Attraction_Category // เพิ่ม category ตาม FastAPI
-    }, { timeout: 20000 }); // เพิ่ม timeout เพื่อป้องกัน hang
-    console.log(`FastAPI call took ${Date.now() - predictStart}ms`, predictRes.data);
-
-    // ตรวจสอบและดึงข้อมูลจาก FastAPI
-    const { sentiment, emojis, emoji_label, Aspect, score } = predictRes.data || {};
-    if (!sentiment || emojis === undefined || emoji_label === undefined || !Aspect || score === undefined) {
-      throw new Error('Incomplete or invalid response from FastAPI: ' + JSON.stringify(predictRes.data));
-    }
+      review: Review
+    });
+    console.log("Predict result from FastAPI:", predictRes.data);
+    // สมมติ FastAPI ส่งกลับ { sentiment, emojis, emoji_label, Aspect }
+    const { sentiment, emojis, emoji_label, Aspect, score } = predictRes.data;
 
     // อัปเดตข้อมูลที่ได้จากโมเดล
     newReview.label = sentiment || "-";
     newReview.Emoji = Array.isArray(emojis) ? emojis.join(' ') : (emojis || "-");
-    newReview.Emoji_Label = typeof emoji_label === "number" ? emoji_label : 0;
+    newReview.Emoji_Label = (typeof emoji_label === "number" ? emoji_label : 0);
     newReview.Aspect = Aspect || "-";
-
+    newReview.CreateAt = new Date();
+    
     // บันทึกลง MongoDB
     const saved = await ReviewModel.create(newReview);
-    console.log('Review saved successfully:', saved);
 
-    res.json({
-      success: true,
-      review: saved,
-      sentiment: sentiment,
-      aspect_stripped: Aspect,
-      CreateAt: saved.CreateAt
-    });
+    res.json({ success: true, 
+              review: saved,
+              sentiment: sentiment,
+              aspect_stripped: Aspect,
+              CreateAt: saved.CreateAt});
   } catch (err) {
-    console.error("Error adding review:", {
-      message: err.message,
-      stack: err.stack,
-      status: err.response?.status,
-      data: err.response?.data,
-      requestBody: req.body
-    });
+    console.error("Error adding review:", err);
     res.status(500).json({ error: err.message });
   }
 });
