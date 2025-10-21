@@ -20,8 +20,10 @@ from bson import ObjectId
 import os
 import gdown
 
+
+
 # Initialize FastAPI app
-app = FastAPI(title="Tourist Reviews API", version="1.0.0")
+app = FastAPI()
 
 # MongoDB Connection
 try:
