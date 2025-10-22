@@ -351,7 +351,7 @@ app.listen(PORT, HOST, () => console.log(`✅ Server running on port ${PORT}`));
 
 
 //ถ้าจะแก้ให้เหมือนเดิมแก้ตรงนี้
-const FASTAPI_URL = 'https://peojectrailway-production-4ceb.up.railway.app';
+const FASTAPI_URL = 'https://modelapi-production-34f0.up.railway.app';
 
 
 app.post('/addReview', async (req, res) => {
