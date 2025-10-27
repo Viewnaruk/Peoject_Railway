@@ -385,11 +385,12 @@ app.post('/addReview', async (req, res) => {
 
     // ส่งรีวิวไป FastAPI เพื่อวิเคราะห์  กับตรงนี้ถ้าจะแก้ให้เหมือนเดิมแก้ตรงนี้
     const predictRes = await axios.post(`${FASTAPI_URL}/predict`, {
-      review: Review
+      review: Review,
+      category: Tourist_Attraction_Category
     });
     console.log("Predict result from FastAPI:", predictRes.data);
     // สมมติ FastAPI ส่งกลับ { sentiment, emojis, emoji_label, Aspect }
-    const { sentiment, emojis, emoji_label, Aspect, score } = predictRes.data;
+    const { sentiment, emojis, emoji_label, Aspect} = predictRes.data;
 
     // อัปเดตข้อมูลที่ได้จากโมเดล
     newReview.label = sentiment || "-";
