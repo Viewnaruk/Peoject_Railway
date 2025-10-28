@@ -24,7 +24,7 @@ async function updatePlacesList(selectedCategory = 'All') {
   });
 }
 
-// เรียกเมื่อโหลดหน้า
+
 
 
 
@@ -370,7 +370,7 @@ async function toggleAddReview() {
 
     console.log("category =", category, "place =", place);
 
-    // ✅ เงื่อนไขให้ container แสดงก็ต่อเมื่อ category ≠ All และ place ≠ ""
+    // เงื่อนไขให้ container แสดงก็ต่อเมื่อ category ≠ All และ place ≠ ""
     if (category !== "All" && place !== "") {
         container.style.display = "block";
     } else {
@@ -382,16 +382,15 @@ async function toggleAddReview() {
 
 // Event listener
 document.addEventListener('DOMContentLoaded', () => {
-    // 📌 1. การประกาศตัวแปร Element IDs ทั้งหมด
+    
     const addReviewInput = document.getElementById("addreview");
     const placesInput = document.getElementById('places');
     const sentimentSelect = document.getElementById('Result');
     const categoryAspectSelect = document.getElementById("Category_Aspect");
     const aspectSelect = document.getElementById("Aspect");
     const categorySelect = document.getElementById('category'); 
-    // ----------------------------------------------------------------
-    // 📌 2. ฟังก์ชัน updateReviewPlaceholder 
-    // ----------------------------------------------------------------
+
+    // 2. ฟังก์ชัน updateReviewPlaceholder 
     function updateReviewPlaceholder() {
         const category = categorySelect.value;
         const place = placesInput.value.trim();
@@ -411,9 +410,8 @@ document.addEventListener('DOMContentLoaded', () => {
     categorySelect.addEventListener("change", updateReviewPlaceholder);
     placesInput.addEventListener("input", updateReviewPlaceholder);
     
-    // ----------------------------------------------------------------
-    // 📌 3. การโหลดข้อมูลเริ่มต้น
-    // ----------------------------------------------------------------
+
+    // 3. การโหลดข้อมูลเริ่มต้น
     updateOverviewTitle();
     updatePlacesList(categorySelect.value);
     updateAllData();
@@ -421,10 +419,8 @@ document.addEventListener('DOMContentLoaded', () => {
     renderAspectChart(); 
     toggleAddReview(); // เรียกครั้งแรกเพื่อให้ซ่อนทันที
 
-    // ----------------------------------------------------------------
-    // 📌 4. Event listeners
-    // ----------------------------------------------------------------
 
+    // 4. Event listeners
     // 4.1. Main Category Change (#category)
     categorySelect.addEventListener('change', async function() {
         
@@ -475,7 +471,7 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleAddReview();
         await renderAspectChart();
 
-        // ✅ อัปเดต placeholder/title หลังอัปเดต category เสร็จ
+        // อัปเดต placeholder/title หลังอัปเดต category เสร็จ
         updateReviewPlaceholder();
     });
 
@@ -518,7 +514,7 @@ document.querySelector("#reviewTable tbody").addEventListener("click", function(
   }
 });
 
-// ฟังก์ชันตอนเปลี่ยน keyword
+
 
 
 
@@ -560,10 +556,7 @@ if (titleRow && titleRow.firstElementChild) {
     }
   });
   tbody.innerHTML = "";
-
-
- 
-  // 🔹 แสดงผล
+  // แสดงผล
   sortedData.slice(0, 10).forEach((item, index) => {
     const positivePercent = item.positivePercent;
     const negativePercent = item.negativePercent;
@@ -583,10 +576,8 @@ if (titleRow && titleRow.firstElementChild) {
     </tr>`;
     tbody.innerHTML += row;
   });
-// ...existing code...
-
 }
-fetchTop10(); // load default
+fetchTop10(); 
 
 
 let currentCategory = document.getElementById("Category_Aspect").value; // เก็บค่าเริ่มต้น
@@ -606,16 +597,16 @@ async function updateAspectDropdown(category) {
     const response = await fetch(`/getAspects?category=${encodeURIComponent(category)}`);
     const data = await response.json();
 
-    // 💡 เก็บค่า Aspect ที่เลือกไว้ปัจจุบัน ก่อนจะล้าง Dropdown
+    // เก็บค่า Aspect ที่เลือกไว้ปัจจุบัน ก่อนจะล้าง Dropdown
     const currentlySelectedAspect = aspectSelect.value; 
 
     aspectSelect.innerHTML = ""; // ล้าง dropdown ก่อน
 
-    // 📌 จัดเรียงใหม่: Other ไว้ล่างสุด
+    // เอา Other ไว้ล่างสุด
     data.sort((a, b) => {
         if (a === "Other") return 1;
         if (b === "Other") return -1;
-        return a.localeCompare(b); // ที่เหลือเรียง A-Z (หรือตัดออกถ้าไม่ต้องการเรียง)
+        return a.localeCompare(b); // ที่เหลือเรียง A-Z 
     });
 
     data.forEach(aspect => {
@@ -626,7 +617,7 @@ async function updateAspectDropdown(category) {
     });
 
     if (data.length > 0) {
-        // 💡 หากมีค่า Aspect เดิมที่เคยเลือกไว้และอยู่ในรายการใหม่ ให้คงค่านั้นไว้
+        // หากมีค่า Aspect เดิมที่เคยเลือกไว้และอยู่ในรายการใหม่ ให้คงค่านั้นไว้
         if (data.includes(currentlySelectedAspect)) {
             aspectSelect.value = currentlySelectedAspect;
         } else {
@@ -637,8 +628,8 @@ async function updateAspectDropdown(category) {
 }
 
 
-// 📌 ฟังก์ชันหลักที่ใช้ในการกำหนดว่าจะวาดกราฟ Aspect/Place แบบใด และเรียกวาด
-// 📌 ฟังก์ชันหลักที่ใช้ในการกำหนดว่าจะวาดกราฟ Aspect/Place แบบใด และเรียกวาด
+
+//ฟังก์ชันควบคุมแผนภูมิ Aspect
 async function renderAspectChart() {
     const mainCategory = mainCategorySelect.value; // ค่าจาก #category
     const place = placesInput.value.trim(); // ค่าจาก #places
@@ -647,10 +638,10 @@ async function renderAspectChart() {
     const aspectDropdownContainer = document.querySelector(".dropdownAspect"); 
     const categoryAspectDropdown = document.querySelector(".dropdownCategory");
     
-    // --- 1. ตรรกะการควบคุมการแสดง Dropdown และการดึง Aspect ---
+    // 1. เงื่อนไขการควบคุมการแสดง Dropdown และการดึง Aspect 
     let targetCategoryForAspect = mainCategorySelect.value; 
 
-    // 📌 ตรรกะการซ่อน/แสดง Dropdown 📌
+    // เงื่อนไขการซ่อน/แสดง Dropdown 
     if (place !== "") {
         // A. ถ้ามี Place ถูกเลือก (ไม่ว่าจะเลือก Category หลักอะไร) -> ซ่อนทั้งหมด
         categoryAspectDropdown.style.display = "none";
@@ -670,10 +661,10 @@ async function renderAspectChart() {
         targetCategoryForAspect = categoryAspectSelect.value; // ใช้ค่าจาก Category_Aspect
     }
 
-    // 📌 ดึง Aspects ที่ถูกต้องมาใส่ Dropdown เสมอ
+    // ดึง Aspects ที่ถูกต้องมาใส่ Dropdown เสมอ
     await updateAspectDropdown(targetCategoryForAspect); 
 
-    // --- 2. ตรรกะการดึงข้อมูลและวาดกราฟ ---
+    // 2. ตรรกะการดึงข้อมูลและวาดกราฟ 
     
     let finalData = [];
     let titleText = "";
@@ -729,7 +720,7 @@ document.getElementById("places").addEventListener("input", async function() {
 
 
 
-// 📌 ฟังก์ชันวาดกราฟแท่งแนวนอน stacked (เรียงจากมากไปน้อย + Other ไว้ล่างสุด)
+// ฟังก์ชันวาดกราฟแท่งแนวนอน stacked (เรียงจากมากไปน้อย + Other ไว้ล่างสุด)
 function drawHorizontalStackedChart(data, titleText, isAspect=false) {
     const processedData = data.map(d => {
         const total = d.positive + d.negative;
@@ -742,7 +733,7 @@ function drawHorizontalStackedChart(data, titleText, isAspect=false) {
         };
     });
 
-    // 📌 เรียง: Other ไปล่างสุด, ที่เหลือเรียงตาม Positive มากไปน้อย
+    // เรียง: Other ไปล่างสุด, ที่เหลือเรียงตาม Positive มากไปน้อย
     processedData.sort((a, b) => {
         if (a.label === "Other") return 1;   // ให้ Other ไปท้าย
         if (b.label === "Other") return -1;  // ถ้า b = Other ให้ a มาก่อน
@@ -787,10 +778,9 @@ function drawHorizontalStackedChart(data, titleText, isAspect=false) {
     });
 }
 
-// **หมายเหตุ:** คุณต้องแน่ใจว่าคุณได้เพิ่มฟังก์ชัน showCustomAlert() 
-// พร้อมทั้งโค้ด HTML และ CSS ของ Custom Modal ลงในโปรเจกต์ของคุณแล้ว
+
 /**
- * ฟังก์ชันแสดง Custom Modal Alert ที่สวยงาม
+ * ฟังก์ชันแสดง Alert 
  * @param {string} type - 'success' หรือ 'error'
  * @param {string} title - หัวข้อหลัก
  * @param {string} line1 - ข้อความบรรทัดที่ 1
@@ -828,7 +818,7 @@ async function addReview() {
     const category = document.getElementById('category').value;
     const place = document.getElementById('places').value;
     const rawReview = document.getElementById('addreview').value;
-    const reviewText = rawReview
+    const reviewText = rawReview //เช็คข้อความ
       .replace(/\u00A0/g, ' ')            // NBSP → space
       .replace(/[\u200B-\u200D\uFEFF]/g, '') // zero-width chars
       .replace(/[“”]/g, '"')              // smart double quotes → "
@@ -841,19 +831,19 @@ async function addReview() {
     // 1. ตรวจสอบข้อมูล
     if (!reviewText) {
         // เปลี่ยนจาก alert ธรรมดา เป็น Custom Alert สำหรับข้อความแจ้งเตือนที่ไม่ผ่าน
-        showCustomAlert('error', '⚠️ Incomplete Data', 'Please enter the review text', 'Kindly check the review field and try again.');
+        showCustomAlert('error', 'Incomplete Data', 'Please enter the review text', 'Kindly check the review field and try again.');
         return;
     }
 
     const allowedPattern = /^[a-zA-Z0-9 .,!?'"()\-]*$/;
 
     if (!allowedPattern.test(reviewText)) {
-        showCustomAlert('error', '⚠️ Invalid Characters', 'The review contains invalid characters.', 'Please write review in english.');
+        showCustomAlert('error', 'Invalid Characters', 'The review contains invalid characters.', 'Please write review in english.');
         return;
     }
 
-    // 2. ดึงข้อมูลทั้งหมดเพื่อหา Tourist_Attraction_ThaiName (โค้ดเดิม)
-    // สมมติว่า fetchDataByPlace เป็นฟังก์ชันที่มีอยู่แล้วและทำงานได้ถูกต้อง
+    // 2. ดึงข้อมูลทั้งหมดเพื่อหา Tourist_Attraction_ThaiName 
+    
     const data = await fetchDataByPlace(''); 
     let thaiName = "-";
     const found = data.find(item => item.Tourist_Attraction === place);
@@ -879,7 +869,7 @@ async function addReview() {
         // 4. จัดการผลลัพธ์ด้วย Custom Alert
         if (dataRes.success) {
             // กรณีสำเร็จ: แสดง Custom Alert ที่สวยงาม
-              const title = "✅ Review Saved Successfully!";
+              const title = "Review Saved Successfully!";
               const line1 = "Thank you for your review.";
               const line2 = "Sentiment Analysis Result: " + dataRes.sentiment + " | Aspect Analysis Result: " + dataRes.aspect_stripped;
             showCustomAlert('success', title, line1, line2);
@@ -892,14 +882,14 @@ async function addReview() {
 
         } else {
             // กรณีเกิดข้อผิดพลาดจาก Backend: แสดง Custom Alert ข้อผิดพลาด
-            const title = "❌ Failed to Save!";
+            const title = "Failed to Save!";
             const line1 = "Review submission failed.";
             const line2 = "Error: " + (dataRes.error || "Please try again.");
             showCustomAlert('error', title, line1, line2);
         }
     } catch (error) {
         // กรณีเกิดข้อผิดพลาดในการเชื่อมต่อ (เช่น Network Error)
-            const title = "🌐 Network Error";
+            const title = "Network Error";
             const line1 = "Connection to the server failed.";
             const line2 = "Check your internet connection and try again.";
         showCustomAlert('error', title, line1, line2);
