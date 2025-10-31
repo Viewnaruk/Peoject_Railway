@@ -481,7 +481,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!addReviewInput || !errorMsg) return;
 
     addReviewInput.addEventListener("input", function () {
-        const regex = /^[a-zA-Z0-9 .,!?'"()\-\p{Emoji}\s]*$/u;
+        const regex = /^[a-zA-Z0-9 .,!?'"()\-\s\p{Extended_Pictographic}]*$/u;
 
         if (!regex.test(this.value)) {
             this.classList.add("error");
@@ -835,7 +835,7 @@ async function addReview() {
         return;
     }
 
-    const allowedPattern = /^[a-zA-Z0-9 .,!?'"()\-\s\p{Emoji}]*$/u;
+    const allowedPattern = /^[a-zA-Z0-9 .,!?'"()\-\s\p{Extended_Pictographic}]*$/u;
 
     if (!allowedPattern.test(reviewText)) {
         showCustomAlert('error', 'Invalid Characters', 'The review contains invalid characters.', 'Please write review in english.');
