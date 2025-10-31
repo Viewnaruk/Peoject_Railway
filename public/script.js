@@ -481,7 +481,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!addReviewInput || !errorMsg) return;
 
     addReviewInput.addEventListener("input", function () {
-        const regex = /^[a-zA-Z0-9 .,!?'"()-]*$/;
+        const regex = /^[a-zA-Z0-9 .,!?'"()\-\p{Emoji}\s]*$/u;
 
         if (!regex.test(this.value)) {
             this.classList.add("error");
