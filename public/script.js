@@ -835,7 +835,7 @@ async function addReview() {
         return;
     }
 
-    const allowedPattern = /^[a-zA-Z0-9 .,!?'"()\-]*$/;
+    const allowedPattern = /^[a-zA-Z0-9 .,!?'"()\-\s\p{Emoji}]*$/;
 
     if (!allowedPattern.test(reviewText)) {
         showCustomAlert('error', 'Invalid Characters', 'The review contains invalid characters.', 'Please write review in english.');
