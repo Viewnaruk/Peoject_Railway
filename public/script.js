@@ -81,7 +81,7 @@ async function fetchDataByPlace(place) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    console.log('Fetched data:', data); // Log เพื่อ debug
+    console.log('Fetched data:', data); 
     return data;
   } catch (error) {
     console.error('Error fetching data:', error.message);
@@ -100,6 +100,7 @@ async function updateAllData(place = '') {
   updateChart(data);
 }
 
+ // ฟังก์ชันกรองข้อมูลและแสดงสรุป
 async function filterAndShowSummary() {
   const category = document.getElementById('category').value;
   let place = document.getElementById('places').value.trim();
@@ -139,15 +140,15 @@ function updateReviewSummary(data) {
   const negativeCount = data.filter(item => item.label === 'Negative').length;
   const total = positiveCount + negativeCount;
 
-document.getElementById('all-reviews').textContent = total.toLocaleString();
+document.getElementById('all-reviews').textContent = total.toLocaleString(); // ใช้ toLocaleString() เพื่อคั่นหลักพัน
 document.getElementById('positive-reviews').textContent = positiveCount.toLocaleString();
 document.getElementById('negative-reviews').textContent = negativeCount.toLocaleString();
 }
 
 // ฟังก์ชันอัปเดตแผนภูมิ
-// ...existing code...
+
 function updateChart(data) {
-  const positiveCount = data.filter(item => item.label === 'Positive').length;
+  const positiveCount = data.filter(item => item.label === 'Positive').length; 
   const negativeCount = data.filter(item => item.label === 'Negative').length;
 
   // เช็คว่า sentimentChart ถูกสร้างและมี datasets จริง
@@ -163,7 +164,7 @@ function updateChart(data) {
     createChart(positiveCount, negativeCount);
   }
 }
-// ...existing code...
+
 
 
 
@@ -333,7 +334,7 @@ function renderReviews(data, sentiment = "all", selectedCategory = "All", place 
     reviewTbody.innerHTML = rows.join("");
 }
 
-// ฟังก์ชันเรียก filter & render
+// ฟังก์ชันกรองและแสดงผลทั้งหมด
 async function filterAndRender() {
     const category = document.getElementById('category').value;
     const place = document.getElementById('places').value.trim();
@@ -357,7 +358,7 @@ async function filterAndRender() {
     renderReviews(data, sentiment, category, place);
 }
 
-
+// ฟังก์ชันควบคุมการแสดง/ซ่อนกล่องเพิ่มรีวิว
 async function toggleAddReview() {
     const categorySelect = document.getElementById('category'); 
     const placesInput = document.getElementById('places'); 
@@ -759,6 +760,10 @@ function drawHorizontalStackedChart(data, titleText, isAspect=false) {
         options: {
             indexAxis: "y",
             responsive: true,
+                animation: {
+                   duration: 1000, // ความเร็วการเคลื่อนไหว (มิลลิวินาที)
+                   easing: "easeInOutQuart" // รูปแบบการเคลื่อนไหว (มีหลายแบบ: linear, easeInOutCubic ฯลฯ)
+    },
             plugins: {
                 title: { display: true, text: titleText },
                 tooltip: {
