@@ -13,9 +13,6 @@ app.use(express.json());
 
 // 
 
-
-
-
 const mongoURI = process.env.MONGO_URI || 'mongodb+srv://sasipreyas:1234@cluster0.fwzmzgy.mongodb.net/Web_App_Tourist_Reviews?retryWrites=true&w=majority';
 if (!mongoURI) {
   console.error('ERROR: MONGO_URI environment variable is not set!');
