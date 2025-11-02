@@ -65,6 +65,7 @@ async function updateOverviewTitle() {
   }
   // 3) ค่าเริ่มต้น (ไม่มี place และ category = All)
   title.textContent = "Overview of Sentiment Analysis Results for Tourist Attractions in Khon Kaen";
+  title.style.color = "";
 }
 
   
