@@ -769,7 +769,7 @@ function drawHorizontalStackedChart(data, titleText, isAspect=false) {
             responsive: true,
                 animation: {
                    duration: 1000, // ความเร็วการเคลื่อนไหว (มิลลิวินาที)
-                   easing: "easeInOutQuart" // รูปแบบการเคลื่อนไหว 
+                   easing: "linear" // รูปแบบการเคลื่อนไหว 
     },
             plugins: {
                 title: { display: true, text: titleText },
