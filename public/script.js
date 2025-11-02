@@ -250,7 +250,7 @@ function shuffleArray(array) {
     return arr;
 }
 
-// ฟังก์ชัน render reviews ครบ
+// ฟังก์ชันแสดงรีวิวในตาราง
 function renderReviews(data, sentiment = "all", selectedCategory = "All", place = "") {
     const reviewTbody = document.querySelector("#reviewTable tbody");
     const reviewSection = document.getElementById("reviewSection");
@@ -272,12 +272,12 @@ function renderReviews(data, sentiment = "all", selectedCategory = "All", place 
 
     let filtered = data;
 
-    // กรองตาม category ถ้ามี
+    // กรองตาม category 
     if (selectedCategory !== "All") {
         filtered = filtered.filter(r => r.Tourist_Attraction_Category === selectedCategory);
     }
 
-    // กรองตาม place ถ้ามี
+    // กรองตาม place 
     if (place && place !== "All") {
         filtered = filtered.filter(r =>
             (r.Tourist_Attraction_ThaiName && r.Tourist_Attraction_ThaiName.toLowerCase().includes(place.toLowerCase())) ||
@@ -293,7 +293,6 @@ function renderReviews(data, sentiment = "all", selectedCategory = "All", place 
         const dateA = new Date(a.CreateAt).getTime();
         const dateB = new Date(b.CreateAt).getTime();
 
-        // เรียงจากใหม่ไปเก่า (Descending): b - a
         // ถ้า b ใหม่กว่า a, ผลลัพธ์จะเป็นบวก ทำให้ b อยู่ก่อน a
         return dateB - dateA;
     });
@@ -316,9 +315,9 @@ function renderReviews(data, sentiment = "all", selectedCategory = "All", place 
             review.label === "Positive"
                 ? '<img src="/img/positive.png" alt="Positive" style="width:24px;height:24px;">'
                 : '<img src="/img/negative.png" alt="Negative" style="width:24px;height:24px;">';
-
+      // สร้างแถวตาราง
         rows.push(`
-            <tr>
+            <tr> 
                 <td>${index + 1}</td>
                 <td>${review.Tourist_Attraction || "-"}</td>
                 <td class="review-scroll">
@@ -326,12 +325,13 @@ function renderReviews(data, sentiment = "all", selectedCategory = "All", place 
                     <span class="full-text" style="display:none;">${fullText}</span>
                     ${fullText.length > maxLength ? '<button class="show-more-btn">More</button>' : ''}
                 </td>
+                <td>${review.Tourist_Attraction_Category || "-"}</td>
                 <td class="result-icon">${resultIcon}</td>
             </tr>
         `);
     });
 
-    reviewTbody.innerHTML = rows.join("");
+    reviewTbody.innerHTML = rows.join(""); 
 }
 
 // ฟังก์ชันกรองและแสดงผลทั้งหมด
@@ -769,7 +769,7 @@ function drawHorizontalStackedChart(data, titleText, isAspect=false) {
             responsive: true,
                 animation: {
                    duration: 1000, // ความเร็วการเคลื่อนไหว (มิลลิวินาที)
-                   easing: "easeOutQuart" // รูปแบบการเคลื่อนไหว 
+                   easing: "easeOutBack" // รูปแบบการเคลื่อนไหว 
     },
             plugins: {
                 title: { display: true, text: titleText },
