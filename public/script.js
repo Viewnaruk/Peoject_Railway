@@ -761,8 +761,8 @@ function drawHorizontalStackedChart(data, titleText, isAspect=false) {
         data: {
             labels: sortedLabels,
             datasets: [
-                { label: "Positive", data: positivePercent, backgroundColor: "#77F9AB" },
-                { label: "Negative", data: negativePercent, backgroundColor: "#FF7B7B" }
+                { label: "Positive", data: positivePercent, backgroundColor: "#77F9AB",hoverBackgroundColor: "#4ADE80" },
+                { label: "Negative", data: negativePercent, backgroundColor: "#FF7B7B" ,hoverBackgroundColor: "#F87171" }
             ]
         },
         options: {
@@ -770,7 +770,7 @@ function drawHorizontalStackedChart(data, titleText, isAspect=false) {
             responsive: true,
                 animation: {
                    duration: 1000, // ความเร็วการเคลื่อนไหว (มิลลิวินาที)
-                   easing: "easeOutBack" // รูปแบบการเคลื่อนไหว 
+                   easing: "easeOutExpo" // รูปแบบการเคลื่อนไหว 
     },
             plugins: {
                 title: { display: true, text: titleText },
