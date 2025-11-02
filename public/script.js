@@ -325,7 +325,7 @@ function renderReviews(data, sentiment = "all", selectedCategory = "All", place 
                     <span class="full-text" style="display:none;">${fullText}</span>
                     ${fullText.length > maxLength ? '<button class="show-more-btn">More</button>' : ''}
                 </td>
-                <td>${review.Tourist_Attraction_Category || "-"}</td>
+                <td>${review.Aspect || "-"}</td>
                 <td class="result-icon">${resultIcon}</td>
             </tr>
         `);
