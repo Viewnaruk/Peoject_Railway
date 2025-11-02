@@ -746,7 +746,14 @@ function drawHorizontalStackedChart(data, titleText, isAspect=false) {
     const negativePercent = processedData.map(d => d.negativePercent);
 
     const ctx = document.getElementById("aspectChart").getContext("2d");
-    if (chartInstance) chartInstance.destroy();
+    if (chartInstance) {
+        chartInstance.data.labels = sortedLabels;
+        chartInstance.data.datasets[0].data = positivePercent;
+        chartInstance.data.datasets[1].data = negativePercent;
+        chartInstance.options.plugins.title.text = titleText;
+        chartInstance.update(); // อัปเดตพร้อม animation
+        return;
+  }
 
     chartInstance = new Chart(ctx, {
         type: "bar",
@@ -762,7 +769,7 @@ function drawHorizontalStackedChart(data, titleText, isAspect=false) {
             responsive: true,
                 animation: {
                    duration: 1000, // ความเร็วการเคลื่อนไหว (มิลลิวินาที)
-                   easing: "easeInOutQuart" // รูปแบบการเคลื่อนไหว (มีหลายแบบ: linear, easeInOutCubic ฯลฯ)
+                   easing: "easeInOutQuart" // รูปแบบการเคลื่อนไหว 
     },
             plugins: {
                 title: { display: true, text: titleText },
